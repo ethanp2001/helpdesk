@@ -10,4 +10,4 @@ pyvenv.cfg
 Lib
 
 #Database
-tickets.db
+database.db
