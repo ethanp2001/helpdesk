@@ -7,6 +7,10 @@
     <h1>Register</h1>
     <form method="POST">
         {{ form.hidden_tag() }}
+        <label for="firstname">First Name:</label>
+        {{ form.firstname(size=32) }}<br>
+        <label for="lastname">Last Name:</label>
+        {{ form.lastname(size=32) }}<br>
         <label for="username">Username:</label>
         {{ form.username(size=32) }}<br>
         <label for="password">Password:</label>

@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin, LoginManager, login_user, login_required, logout_user, current_user
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
-from wtforms.validators import InputRequired, Length, Email
+from wtforms.validators import InputRequired, Length
 from werkzeug.security import generate_password_hash, check_password_hash
 
 #Initialise Database
@@ -32,6 +32,8 @@ class User(db.Model, UserMixin):
 class RegistrationForm(FlaskForm):
     username = StringField('Username', validators=[InputRequired(), Length(min=4,max=20)])
     password = PasswordField('Password', validators=[InputRequired(), Length(min=8,max=30)])
+    firstname = StringField('First Name', validators=[InputRequired(), Length(min=1,max=30)])
+    lastname = StringField('Last Name', validators=[InputRequired(), Length(min=1,max=30)])                       
     submit = SubmitField('Register')
 
 #Create User Login Form in Flask-WTF
@@ -76,7 +78,7 @@ def register():
     form = RegistrationForm()
     if form.validate_on_submit():
         hashed_password = generate_password_hash(form.password.data, method='pbkdf2:sha256')
-        new_user = User(username=form.username.data, password=hashed_password)
+        new_user = User(username=form.username.data, password=hashed_password, firstname=form.firstname, lastname=form.lastname)
         db.session.add(new_user)
         db.session.commit()
         flash('Registration has been successful!', 'success')
