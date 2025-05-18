@@ -69,7 +69,7 @@ def create_ticket():
 @login_required
 def view_tickets():
     tickets = Ticket.query.all()
-    return f"Hello, {current_user.username}! Welcome to the Ofqual IT Helpdesk."
+    return f"Hello, {current_user.firstname}! Welcome to the Ofqual IT Helpdesk."
     return render_template('main_page.html', tickets=tickets)
 
 #User Registration Page
@@ -78,7 +78,12 @@ def register():
     form = RegistrationForm()
     if form.validate_on_submit():
         hashed_password = generate_password_hash(form.password.data, method='pbkdf2:sha256')
-        new_user = User(username=form.username.data, password=hashed_password, firstname=form.firstname, lastname=form.lastname)
+        new_user = User(
+            username=form.username.data, 
+            password=hashed_password, 
+            firstname=form.firstname.data, 
+            lastname=form.lastname.data
+        )
         db.session.add(new_user)
         db.session.commit()
         flash('Registration has been successful!', 'success')
