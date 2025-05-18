@@ -11,3 +11,4 @@ Lib
 
 #Database
 *.db
+*.sqlite3
