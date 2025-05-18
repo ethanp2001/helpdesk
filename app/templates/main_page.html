@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Tickets</title>
+</head>
+<body>
+    <h1>All Tickets</h1>
+    <ul>
+        {% for ticket in tickets %}
+        <li>{{ ticket.title }} - {{ ticket.description }} - {{ ticket.status }}</li>
+        {% endfor %}
+    </ul>
+<button id="Enter" type="button" onclick="window.location.href = '/createticket' ; " class="button">Raise a Ticket</button>
+</body>
+</html>
