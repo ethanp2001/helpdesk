@@ -2,6 +2,7 @@
 
 #Venv Scripts
 Scripts
+bin
 
 #Python Venv
 pyvenv.cfg
