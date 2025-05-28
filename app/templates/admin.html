@@ -21,6 +21,11 @@
                     <button type="submit">Promote to Admin</button>
                 </form>
                 {% endif %}
+                {% if user.role != 'admin' %}
+                <form method="POST" action="{{ url_for('delete_user', user_id=user.id) }}">
+                    <button type="submit">Delete User</button>
+                </form>
+                {% endif %}
             </td>
         </tr>
         {% endfor %}
@@ -28,9 +33,10 @@
 
     <h2>Tickets</h2>
     <table border="1">
-        <tr><th>Title</th><th>Description</th><th>Status</th><th>Actions</th></tr>
+        <tr><th>Requestor</th><th>Title</th><th>Description</th><th>Status</th><th>Actions</th></tr>
         {% for ticket in tickets %}
         <tr>
+            <td>{{ ticket.user.username }}</td>
             <td>{{ ticket.title }}</td>
             <td>{{ ticket.description }}</td>
             <td>{{ ticket.status }}</td>
@@ -40,6 +46,9 @@
                     <button type="submit">Close Ticket</button>
                 </form>
                 {% endif %}
+                <form method="POST" action="{{ url_for('delete_ticket', ticket_id=ticket.id) }}">
+                    <button type="submit">Delete Ticket</button>
+                </form>
             </td>
         </tr>
         {% endfor %}
