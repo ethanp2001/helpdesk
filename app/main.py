@@ -183,9 +183,10 @@ def delete_user(user_id):
 def update_ticket(ticket_id):
     ticket = Ticket.query.get_or_404(ticket_id)
 
-    #Check to prevent users from editing tickets not their own
-    if ticket.user_id != current_user.id:
-        abort(403)
+    #Check to prevent users from editing tickets not their own if not admin
+    if current_user.role != 'admin':
+        if ticket.user_id != current_user.id:
+            abort(403)
 
     if request.method == 'POST':
         title = request.form.get('title')
@@ -199,6 +200,7 @@ def update_ticket(ticket_id):
         return redirect(url_for('view_tickets'))
     return render_template('updateticket.html', ticket=ticket)
 
+    
 #Program start
 if __name__ == '__main__':
     with app.app_context():

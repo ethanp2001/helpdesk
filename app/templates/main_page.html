@@ -16,15 +16,18 @@
         <td>{{ ticket.description }}</td>
         <td>{{ ticket.status }}</td>
         <td>
+            {% if ticket.user_id == current_user.id %}
             <a href="{{ url_for('update_ticket', ticket_id=ticket.id) }}">
                 <button>Edit Ticket</button>
             </a>
+            {% endif %}
         </td>
     </tr>
     {% endfor %}
 </table> 
 
 <button id="Enter" type="button" onclick="window.location.href = '/createticket' ; " class="button">Raise a Ticket</button>
+
 {% if current_user.role == 'admin' %}
     <a href="/admin">Admin Dashboard</a>
 {% endif %}
