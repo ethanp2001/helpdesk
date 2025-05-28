@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel</title>
+</head>
+<body>
+    <h1>Admin Panel</h1>
+
+    <h2>Users</h2>
+    <table border="1">
+        <tr><th>Username</th><th>Firstname</th><th>Last name</th><th>Role</th><th>Actions</th></tr>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.username }}</td>
+            <td>{{ user.firstname }}</td>
+            <td>{{ user.lastname }}</td>
+            <td>{{ user.role }}</td>
+            <td>
+                {% if user.role != 'admin' %}
+                <form method="POST" action="{{ url_for('promote_user', user_id=user.id) }}">
+                    <button type="submit">Promote to Admin</button>
+                </form>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Tickets</h2>
+    <table border="1">
+        <tr><th>Title</th><th>Description</th><th>Status</th><th>Actions</th></tr>
+        {% for ticket in tickets %}
+        <tr>
+            <td>{{ ticket.title }}</td>
+            <td>{{ ticket.description }}</td>
+            <td>{{ ticket.status }}</td>
+            <td>
+                {% if ticket.status != 'Closed' %}
+                <form method="POST" action="{{ url_for('close_ticket', ticket_id=ticket.id) }}">
+                    <button type="submit">Close Ticket</button>
+                </form>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

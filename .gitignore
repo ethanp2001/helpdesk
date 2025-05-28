@@ -9,7 +9,11 @@ pyvenv.cfg
 
 #Python Libraries
 Lib
+bin
 
 #Database
 *.db
 *.sqlite3
+
+#.env
+.env

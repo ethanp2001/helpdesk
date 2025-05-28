@@ -11,5 +11,8 @@
         {% endfor %}
     </ul>
 <button id="Enter" type="button" onclick="window.location.href = '/createticket' ; " class="button">Raise a Ticket</button>
+{% if current_user.role == 'admin' %}
+    <a href="/admin">Admin Dashboard</a>
+{% endif %}
 </body>
 </html>
