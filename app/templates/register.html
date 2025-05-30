@@ -2,10 +2,14 @@
 <html>
 <head>
     <title>Register</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h1>Register</h1>
-    <form method="POST">
+    <div class="logo-container">
+        <img src="{{ url_for('static', filename='Ofqual_logo_2018.svg.png') }}" alt="Company Logo" class="logo">
+    </div>
+    <form class="login-form" method="POST">
+        <h2>Register for an account</h2>
         {{ form.hidden_tag() }}
         <label for="firstname">First Name:</label>
         {{ form.firstname(size=32) }}<br>
@@ -15,7 +19,9 @@
         {{ form.username(size=32) }}<br>
         <label for="password">Password:</label>
         {{ form.password(size=32) }}<br>
-        {{ form.submit() }}
+        <div class="login-button">
+            {{ form.submit() }}
+        </div>
     </form>
 </body>
 </html>

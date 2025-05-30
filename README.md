@@ -9,6 +9,7 @@ This is a prototype project designed for Level 5 Software Engineering & Agile DT
 - dotenv
 ### Install Dependencies
 ``pip install -r requirements.txt``
+- Create .env file within the /app directory, in which enter "'SECRET_KEY' = 'yoursecretkey'"
 ### Start the app
 From /app directory:
 ``py main.py``

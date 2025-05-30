@@ -71,9 +71,20 @@ def role_required(role):
 def load_user(user_id):
     return User.query.get(int(user_id))
 
+#403 error handler to smoothly handle forbidden errors
 @app.errorhandler(403)
 def forbidden(e):
     return render_template('forbidden.html'), 403
+
+#404 error handler to smoothly handle not found errors
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('notfound.html'), 404
+
+#Redirect from root of webpage to home page
+@app.route("/")
+def redirect_home():
+    return redirect("/home")
 
 #Create ticket page
 @app.route('/createticket', methods=['GET', 'POST'])

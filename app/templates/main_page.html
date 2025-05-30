@@ -2,12 +2,16 @@
 <html>
 <head>
     <title>Helpdesk - Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
+<div class="logo-container">
+    <img src="{{ url_for('static', filename='Ofqual_logo_2018.svg.png') }}" alt="Company Logo" class="logo">
+</div>
 <h1>Helpdesk - Home</h1>
 
 <h2>All Tickets</h2>
-<table border="1">
+<table class="table">
     <tr><th>Requestor</th><th>Ticket Title</th><th>Ticket Description</th><th>Ticket Status</th><th>Update Ticket</th></tr>
     {% for ticket in tickets %}
     <tr>
@@ -29,11 +33,11 @@
 <button id="Enter" type="button" onclick="window.location.href = '/createticket' ; " class="button">Raise a Ticket</button>
 
 {% if current_user.role == 'admin' %}
-    <a href="/admin">Admin Dashboard</a>
+    <button id="Enter" type="button" onclick="window.location.href = '/admin' ; " class="button">Admin Dashboard</button>
 {% endif %}
 
 <h2>All Users</h2>
-<table border="1">
+<table class="table">
     <tr><th>Username</th><th>First Name</th><th>Last Name</th><th>Role</th></tr>
     {% for user in users %}
     <tr>
