@@ -1,0 +1,28 @@
+# Byte-compiled / cache files
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environments
+venv/
+env/
+Scripts/
+
+# Git and other VCS
+.git/
+.gitignore
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Docker files
+Dockerfile
+.dockerignore
+
+# Logs
+*.log
+
+# IDE/editor folders
+.vscode/
+.idea/
