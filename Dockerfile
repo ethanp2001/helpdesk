@@ -5,11 +5,16 @@ FROM python:3.11-slim
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
-# Set working directory
+#Set working directory
 WORKDIR /app
 
-# Copy project files
+#Copy Project files into container
 COPY . /app/
+
+# Copy and set permissions for entrypoint
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+RUN mkdir -p /data && chmod 777 /data
 
 # Install dependencies
 RUN pip install --upgrade pip
@@ -19,4 +24,5 @@ RUN pip install -r requirements.txt
 EXPOSE 5000
 
 # Run the application
+ENTRYPOINT ["/entrypoint.sh"]
 CMD ["python3", "main.py"]

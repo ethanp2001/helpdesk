@@ -1,4 +1,6 @@
 #Import Required Libraries
+from dotenv import load_dotenv
+load_dotenv()
 from flask import Flask, render_template, request, redirect, url_for, flash, abort
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin, LoginManager, login_user, login_required, logout_user, current_user
@@ -8,12 +10,11 @@ from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import InputRequired, Length
 from werkzeug.security import generate_password_hash, check_password_hash
 from functools import wraps
-from dotenv import load_dotenv
 import os
 
 #Initialise Database
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 db = SQLAlchemy(app)
 
@@ -111,6 +112,11 @@ def view_tickets():
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
+        existingUser = User.query.filter_by(username=form.username.data).first()
+        if existingUser:
+            flash('Username already taken. Please choose a different one.', 'danger')
+            return render_template('register.html', form=form)
+        
         hashed_password = generate_password_hash(form.password.data, method='pbkdf2:sha256')
         new_user = User(
             username=form.username.data, 
@@ -124,7 +130,6 @@ def register():
         flash('Registration has been successful!', 'success')
         return redirect('/login')
     return render_template('register.html', form=form)
-
 #User login Page
 @app.route('/login', methods=['GET', 'POST'])
 def login():

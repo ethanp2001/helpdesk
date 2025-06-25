@@ -1,0 +1,12 @@
+services:
+  helpdesk:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - helpdesk-db:/data
+    environment:
+      - DATABASE_URL=sqlite:////data/app.db
+
+volumes:
+  helpdesk-db:
