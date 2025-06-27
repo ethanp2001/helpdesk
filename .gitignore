@@ -6,6 +6,7 @@ bin
 
 #Python Venv
 pyvenv.cfg
+Include
 
 #Python Libraries
 Lib

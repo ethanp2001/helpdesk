@@ -91,7 +91,7 @@ def redirect_home():
 def create_ticket():
     if request.method == 'POST':
         title = request.form['title']
-        description = request.form['title']
+        description = request.form['description']
         new_ticket = Ticket(title=title, description=description, user_id=current_user.id)
         db.session.add(new_ticket)
         db.session.commit()
